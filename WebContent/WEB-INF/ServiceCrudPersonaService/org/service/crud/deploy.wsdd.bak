@@ -1,0 +1,46 @@
+<!-- Use this file to deploy some handlers/chains and services      -->
+<!-- Two ways to do this:                                           -->
+<!--   java org.apache.axis.client.AdminClient deploy.wsdd          -->
+<!--      after the axis server is running                          -->
+<!-- or                                                             -->
+<!--   java org.apache.axis.utils.Admin client|server deploy.wsdd   -->
+<!--      from the same directory that the Axis engine runs         -->
+
+<deployment
+    xmlns="http://xml.apache.org/axis/wsdd/"
+    xmlns:java="http://xml.apache.org/axis/wsdd/providers/java">
+
+  <!-- Services from ServiceCrudPersonaService WSDL service -->
+
+  <service name="ServiceCrudPersona" provider="java:RPC" style="wrapped" use="literal">
+      <parameter name="wsdlTargetNamespace" value="http://crud.service.org"/>
+      <parameter name="wsdlServiceElement" value="ServiceCrudPersonaService"/>
+      <parameter name="schemaQualified" value="http://crud.service.org"/>
+      <parameter name="wsdlServicePort" value="ServiceCrudPersona"/>
+      <parameter name="className" value="org.service.crud.ServiceCrudPersonaSoapBindingImpl"/>
+      <parameter name="wsdlPortType" value="ServiceCrudPersona"/>
+      <parameter name="typeMappingVersion" value="1.2"/>
+      <operation name="altaPersona" qname="operNS:altaPersona" xmlns:operNS="http://crud.service.org" returnQName="retNS:altaPersonaReturn" xmlns:retNS="http://crud.service.org" returnType="rtns:string" xmlns:rtns="http://www.w3.org/2001/XMLSchema" soapAction="" >
+        <parameter qname="pns:id" xmlns:pns="http://crud.service.org" type="tns:int" xmlns:tns="http://www.w3.org/2001/XMLSchema"/>
+        <parameter qname="pns:nombre" xmlns:pns="http://crud.service.org" type="tns:string" xmlns:tns="http://www.w3.org/2001/XMLSchema"/>
+        <parameter qname="pns:apepat" xmlns:pns="http://crud.service.org" type="tns:string" xmlns:tns="http://www.w3.org/2001/XMLSchema"/>
+        <parameter qname="pns:tel" xmlns:pns="http://crud.service.org" type="tns:string" xmlns:tns="http://www.w3.org/2001/XMLSchema"/>
+      </operation>
+      <operation name="modificaPersona" qname="operNS:modificaPersona" xmlns:operNS="http://crud.service.org" returnQName="retNS:modificaPersonaReturn" xmlns:retNS="http://crud.service.org" returnType="rtns:string" xmlns:rtns="http://www.w3.org/2001/XMLSchema" soapAction="" >
+        <parameter qname="pns:nombre" xmlns:pns="http://crud.service.org" type="tns:string" xmlns:tns="http://www.w3.org/2001/XMLSchema"/>
+        <parameter qname="pns:apepat" xmlns:pns="http://crud.service.org" type="tns:string" xmlns:tns="http://www.w3.org/2001/XMLSchema"/>
+        <parameter qname="pns:tel" xmlns:pns="http://crud.service.org" type="tns:string" xmlns:tns="http://www.w3.org/2001/XMLSchema"/>
+        <parameter qname="pns:id" xmlns:pns="http://crud.service.org" type="tns:int" xmlns:tns="http://www.w3.org/2001/XMLSchema"/>
+      </operation>
+      <operation name="eliminaPersona" qname="operNS:eliminaPersona" xmlns:operNS="http://crud.service.org" returnQName="retNS:eliminaPersonaReturn" xmlns:retNS="http://crud.service.org" returnType="rtns:string" xmlns:rtns="http://www.w3.org/2001/XMLSchema" soapAction="" >
+        <parameter qname="pns:id" xmlns:pns="http://crud.service.org" type="tns:int" xmlns:tns="http://www.w3.org/2001/XMLSchema"/>
+      </operation>
+      <operation name="consultaIdPersona" qname="operNS:consultaIdPersona" xmlns:operNS="http://crud.service.org" returnQName="retNS:consultaIdPersonaReturn" xmlns:retNS="http://crud.service.org" returnType="rtns:string" xmlns:rtns="http://www.w3.org/2001/XMLSchema" soapAction="" >
+        <parameter qname="pns:id" xmlns:pns="http://crud.service.org" type="tns:int" xmlns:tns="http://www.w3.org/2001/XMLSchema"/>
+      </operation>
+      <operation name="connecDataBaseOracle" qname="operNS:connecDataBaseOracle" xmlns:operNS="http://crud.service.org" soapAction="" >
+      </operation>
+      <parameter name="allowedMethods" value="altaPersona modificaPersona connecDataBaseOracle eliminaPersona consultaIdPersona"/>
+
+  </service>
+</deployment>
